@@ -1,0 +1,11 @@
+C:\Users\Administrado\Desktop\clinica\Clinica\DATA\bin\Debug\DATA.exe.config
+C:\Users\Administrado\Desktop\clinica\Clinica\DATA\bin\Debug\DATA.exe
+C:\Users\Administrado\Desktop\clinica\Clinica\DATA\bin\Debug\DATA.pdb
+C:\Users\Administrado\Desktop\clinica\Clinica\DATA\bin\Debug\EntityFramework.dll
+C:\Users\Administrado\Desktop\clinica\Clinica\DATA\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Administrado\Desktop\clinica\Clinica\DATA\bin\Debug\EntityFramework.xml
+C:\Users\Administrado\Desktop\clinica\Clinica\DATA\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Administrado\Desktop\clinica\Clinica\DATA\obj\Debug\DATA.csproj.CoreCompileInputs.cache
+C:\Users\Administrado\Desktop\clinica\Clinica\DATA\obj\Debug\DATA.csproj.CopyComplete
+C:\Users\Administrado\Desktop\clinica\Clinica\DATA\obj\Debug\DATA.exe
+C:\Users\Administrado\Desktop\clinica\Clinica\DATA\obj\Debug\DATA.pdb
