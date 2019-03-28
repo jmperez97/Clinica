@@ -89,3 +89,5 @@ C:\Users\Administrado\Desktop\clinica\Clinica\API\obj\Debug\API.csproj.CoreCompi
 C:\Users\Administrado\Desktop\clinica\Clinica\API\obj\Debug\API.csproj.CopyComplete
 C:\Users\Administrado\Desktop\clinica\Clinica\API\obj\Debug\API.dll
 C:\Users\Administrado\Desktop\clinica\Clinica\API\obj\Debug\API.pdb
+C:\Users\Administrado\Desktop\clinica\Clinica\API\bin\EntityFramework.SqlServer.dll
+C:\Users\Administrado\Desktop\clinica\Clinica\API\bin\EntityFramework.SqlServer.xml

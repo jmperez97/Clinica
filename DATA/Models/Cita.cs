@@ -13,5 +13,8 @@ namespace DATA.Models
 		public string Tipo { get; set; }
 		public DateTime fecha { get; set; }
 		public string estado { get; set; }
+		public int idPaciente { get; set; }
+		public int IdTipo { get; set; }
+		public string FechaCita { get; set; }
 	}
 }

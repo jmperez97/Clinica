@@ -10,5 +10,10 @@ namespace DATA.Repository
 	public interface ICitasRepository
 	{
 		List<Cita> GetCitas();
+		List<Tipo> GetTipo();
+		List<Paciente> GetPaciente();
+		void GestionarPaciente(Paciente pac);
+		string CrearCita(Cita cita);
+		string CancelarCita(int id);
 	}
 }

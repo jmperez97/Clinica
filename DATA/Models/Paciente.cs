@@ -13,6 +13,7 @@ namespace DATA.Models
 		public string cedula { get; set; }
 		public string telefono { get; set; }
 		public string estado { get; set;}
+		public string Accion { get; set; }
 
 	}
 }

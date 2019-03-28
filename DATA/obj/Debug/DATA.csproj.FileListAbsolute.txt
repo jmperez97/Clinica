@@ -9,3 +9,4 @@ C:\Users\Administrado\Desktop\clinica\Clinica\DATA\obj\Debug\DATA.csproj.CoreCom
 C:\Users\Administrado\Desktop\clinica\Clinica\DATA\obj\Debug\DATA.csproj.CopyComplete
 C:\Users\Administrado\Desktop\clinica\Clinica\DATA\obj\Debug\DATA.exe
 C:\Users\Administrado\Desktop\clinica\Clinica\DATA\obj\Debug\DATA.pdb
+C:\Users\Administrado\Desktop\clinica\Clinica\DATA\obj\Debug\DATA.csprojAssemblyReference.cache
