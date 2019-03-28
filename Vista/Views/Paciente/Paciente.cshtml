@@ -1,0 +1,157 @@
+﻿
+
+@using (Html.BeginForm("RecaudoTaquilla", "RecaudoTaquilla", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+<div class="wp-content">
+	<div class="row">
+		<div class="title-header">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-8">
+						<input type="button" value="Guardar" onclick="Guardar()" class="btn btn-success btn-sm" id="btnGuardar" />
+
+					</div>
+
+					<div class="col-4 pt-2">
+						<h2 class="title-view">Paciente /  Gestionar </h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="form-group col-6">
+				<label> Cédula:</label>
+				<input type="text" class="form-control" id="TxtId" maxlength="13" />
+			</div>
+			<div class="form-group col-6">
+				<label> Cédula:</label>
+				<input type="text" class="form-control" id="TxtCedula" maxlength="13" />
+			</div>
+			<div class="form-group col-6">
+				<label> Nombre:</label>
+				<input type="text" class="form-control" id="TxtNombre" maxlength="60" />
+			</div>
+			<div class="form-group col-6">
+				<label> Celular:</label>
+				<input type="text" class="form-control" id="TxtTelefono" maxlength="15" />
+			</div>
+		
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<div id="panelPaciente" class="">
+				<table id="tablaPaciente" class="table table-striped table-bordered " style="width:100%">
+					<thead style="background-color:#007E69; color:antiquewhite;">
+						<tr>
+							<th></th>
+							<th>id</th>
+							<th>Nombre</th>
+							<th>Cédula</th>
+							<th>Telefono</th>
+							<th>Estado</th>
+						</tr>
+				</table>
+
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+}
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+
+		})
+		function consultar()
+		{
+			$('#tablaPaciente tbody').remove();			
+
+			$.ajax({ //Do an ajax post to the controller
+				type: 'GET',
+				url: '/Paciente/GetPacientes',				
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",			
+				success: function (dataa) {
+
+					if (dataa.Error == undefined || dataa.Error == "") {
+						var pacientes = JSON.parse(dataa.Response);						
+						data = pacientes;
+						var table = document.getElementById("tablaPaciente");
+
+						if (data.length > 0) {
+
+							var html = '<thead style="background-color:#007E69; color:antiquewhite;"><tr>...</tr></thead><tbody>';
+
+							for (var i = 0, len = data.length; i < len; ++i) {							
+
+
+								html += `<tr>
+																			'<td><input type="checkbox"  onclick="CheckAnul(this,'`+ data[i].Tiquete + `')" class="custom-checkbox"` + check + ` /></td>'
+                                                                            <td class ="tdTiquete">`+ data[i].id + `</td>
+																			 <td class ="tdTiquete">`+ data[i].Nombre + `</td
+                                                                            <td class ="tdTiquete">`+ data[i].Cedula + `</td
+                                                                            <td class ="tdTiquete">`+ data[i].Estado + `</td>
+                                                                            <td class ="tdTiquete">`+ data[i].Valor + `</td>
+                                                                            <td class ="tdTiquete">`+ data[i].FechaViaje + `</td>
+                                                                            <td class ="tdTiquete">`+ data[i].Destino + `</td>
+                                                                            <td class ="tdTiquete">`+ data[i].Estado + `</td>
+                                                                            <td class ="tdTiquete">`+ entreg + `</td>
+
+                                                                        </tr>`;
+
+							}
+							var html2 = html.replace("null", "");
+							$(html2).appendTo('#tablaPaciente');
+
+
+
+						}
+						else {
+							//   alert("No se encontraron datos");
+							$('#modalValidacion').modal('show');
+							$('#lblmensajeValidacion').html("No se encontraron datos");
+						}
+
+						//$('.loader').fadeOut("slow");
+						$('.divLoading').css('display', 'none');
+					}
+
+					else if (dataa.Error == "RedireccionarLogin") {
+						$('.divLoading').css('display', 'none');
+						location.reload();
+					}
+					else {
+						//$('.loader').fadeOut("slow");
+						$('.divLoading').css('display', 'none');
+						$('#modalValidacion').modal('show');
+						$('#lblmensajeValidacion').html("<h6>" + dataa.Error + "</h6>");
+					}
+				},
+				error: function (err) {
+
+					$('#btnConsultar').val("Consultar");
+					$('#btnConsultar').prop("disabled", false);
+					$('.divLoading').css('display', 'none');
+					if (err.status == 401) {
+						location.reload();
+					}
+					else {
+						$('#modalValidacion').modal('show');
+						$('#lblmensajeValidacion').html("Error al consultar");
+					}
+
+				},
+			});
+		}
+	</script>
+
+}
