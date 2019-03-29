@@ -61,6 +61,28 @@ namespace API.Controllers
 			}
 		}
 		[HttpGet]
+		[Route("GetListaPaciente")]
+		public async Task<IHttpActionResult> GetListaPaciente()
+		{
+			try
+			{
+				ICitasRepository iCitasRepository;
+				iCitasRepository = new CitasRepository();
+				var result = iCitasRepository.GetListaPaciente();
+
+				MessageResult messageResult = new MessageResult();
+				messageResult.Objeto = result;
+				messageResult.Status = HttpStatusCode.OK;
+				return Ok(messageResult);
+
+			}
+			catch (Exception exc)
+			{
+
+				throw exc;
+			}
+		}
+		[HttpGet]
 		[Route("GetPaciente")]
 		public async Task<IHttpActionResult> GetPaciente()
 		{
@@ -130,13 +152,13 @@ namespace API.Controllers
 		}
 		[HttpGet]
 		[Route("Cancelar")]
-		public async Task<IHttpActionResult> CancelarCita(int id)
+		public async Task<IHttpActionResult> CancelarCita(string id)
 		{
 			try
 			{
 				ICitasRepository iCitasRepository;
 				iCitasRepository = new CitasRepository();
-				var result = iCitasRepository.CancelarCita(id);
+				var result = iCitasRepository.CancelarCita(Convert.ToInt32(id));
 
 				MessageResult messageResult = new MessageResult();
 				messageResult.Objeto = result;

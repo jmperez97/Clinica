@@ -1,0 +1,207 @@
+﻿
+@{
+	ViewBag.Title = "cita";
+}
+@using Vista.Models
+@model cita
+
+
+@using (Html.BeginForm("paciente", "paciente", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+	<div class="wp-content">
+		<div class="row">
+			<div class="title-header">
+				<div class="container-fluid">
+					<div class="row col-md-12">
+						<div class="col-8">
+							<input type="button" value="Agendar" onclick="Agendar()" class="btn btn-success btn-sm" id="btnGuardar" />
+							<input type="button" value="Cancelar" onclick="gestionarPaciente('A')" class="btn btn-success btn-sm" id="btnGuardar" />
+
+							<input type="button" value="Limpiar" onclick="location.reload()" class="btn btn-success btn-sm" id="btnGuardar" />
+
+						</div>
+
+						<div class="col-4 pt-2">
+							<h2 class="title-view">Cita /  Cita </h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row col-9">				
+				<div class="form-group col-md-3">
+					<label> fecha:</label>
+					<input type="date" class="form-control" id="TxtFecha" maxlength="20" />
+				</div>
+
+				<div class="form-group col-md-3">
+					<label> Tipo:</label>
+					<select id="CbTipo" class="form-control">
+						@foreach (var item in Model.ListTipo)
+						{
+							<option value="@item.Text">@item.Value</option>
+						}
+					</select>
+				</div>
+				<div class="form-group col-md-3">
+					<label> Paciente:</label>
+					<select id="CbPaciente" class="form-control">
+						@foreach (var item in Model.listPac)
+						{
+							<option value="@item.Text">@item.Value</option>
+						}
+					</select>
+				</div>
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div id="panelPaciente" class="">
+					<table id="tablaPaciente" class="table table-responsive table-striped table-bordered " style="width:100%">
+						<thead style="background-color:#4caf50; color:antiquewhite;">
+							<tr>
+								<th></th>
+								<th>id</th>
+								<th>Nombre</th>
+								<th>Tipo</th>
+								<th>Fecha</th>
+								<th>Estado</th>
+							</tr>
+					</table>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+}
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+			consultar();
+		})
+		function consultar() {
+
+			$('#tablaPaciente tbody').remove();
+
+			$.ajax({ //Do an ajax post to the controller
+				type: 'GET',
+				url: '/Cita/GetCitas',
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function (dataa) {
+
+					if (dataa.Error == undefined || dataa.Error == "") {
+						var pacientes = JSON.parse(dataa);
+						data = pacientes;
+						var table = document.getElementById("tablaPaciente");
+
+						if (data.length > 0) {
+
+							var html = '<thead style="background-color:#4caf50; color:green;"><tr>...</tr></thead><tbody>';
+							for (var i = 0, len = data.length; i < len; ++i) {
+
+
+								html += `<tr>
+																					'<td><input type="Button" value="anular"  onclick="anular(`+ data[i].id+`)"  class="custom-checkbox" /></td>'
+																					<td >`+ data[i].id + `</td>
+																					 <td >`+ data[i].Nombre + `</td>
+																					<td >`+ data[i].Tipo + `</td>
+																					<td >`+ data[i].fecha + `</td>
+																					<td >`+ data[i].estado + `</td>
+
+
+																				</tr>`;
+
+							}
+
+							$(html).appendTo('#tablaPaciente');
+
+
+
+
+
+						}
+						else {
+							//   alert("No se encontraron datos");
+
+							alert("No se encontraron datos");
+						}
+
+
+					}
+
+					else {
+
+
+
+						alert(dataa.Error);
+					}
+				},
+				error: function (err) {
+
+					alert("Error al consultar");
+
+				},
+			});
+		}
+		function Agendar()
+		{
+			if ($('#TxtFecha').val() != '') {
+				var obj = {
+					idPaciente: $('#CbPaciente').val(),
+					IdTipo: $('#CbTipo').val(),
+					cedula: $('#TxtCedula').val(),
+					FechaCita: $('#TxtFecha').val()
+
+				}
+				$.ajax({
+					type: 'POST',
+					url: '@Url.Action("Agendar", "cita")',
+					data: JSON.stringify(obj),
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function (dataa) {
+						alert(dataa);
+						consultar();
+
+					},
+					error: function (err) {
+						alert("Error");
+					},
+
+				});
+			}
+			else
+			{
+				alert("Debe ingresar la fecha");
+			}
+		}
+
+		function anular(id)
+		{
+			$.ajax({
+				url: "@Url.Action("Cancelar", "cita")",
+				type: "GET",
+				data: {id:id},
+                    success: function (dataa) {
+						alert(dataa);
+						consultar();
+                    },
+				error: function (err) {
+					alert("Error");
+                    },
+                });
+
+		}
+	</script>
+
+}
+

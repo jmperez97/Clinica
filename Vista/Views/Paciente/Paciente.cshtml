@@ -1,6 +1,6 @@
 ﻿
 
-@using (Html.BeginForm("RecaudoTaquilla", "RecaudoTaquilla", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("paciente", "paciente", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
 	<div class="wp-content">
 		<div class="row">
@@ -8,7 +8,9 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-8">
-							<input type="button" value="Guardar" onclick="Guardar()" class="btn btn-success btn-sm" id="btnGuardar" />
+							<input type="button" value="Guardar" onclick="gestionarPaciente('G')" class="btn btn-success btn-sm" id="btnGuardar" />
+							<input type="button" value="Actualizar" onclick="gestionarPaciente('A')" class="btn btn-success btn-sm" id="btnGuardar" />
+							<input type="button" value="Inactivar" onclick="gestionarPaciente('D')" class="btn btn-success btn-sm" id="btnGuardar" />
 							<input type="button" value="Limpiar" onclick="location.reload()" class="btn btn-success btn-sm" id="btnGuardar" />
 
 						</div>
@@ -51,8 +53,8 @@
 		<div class="row">
 			<div class="col-12">
 				<div id="panelPaciente" class="">
-					<table id="tablaPaciente" class="table table-striped table-bordered " style="width:100%">
-						<thead style="background-color:#007E69; color:antiquewhite;">
+					<table id="tablaPaciente" class="table table-responsive  table-striped table-bordered " style="width:100%">
+						<thead style="background-color:#4caf50; color:antiquewhite;">
 							<tr>
 								<th></th>
 								<th>id</th>
@@ -97,7 +99,7 @@
 
 						if (data.length > 0) {
 
-							var html = '<thead style="background-color:#007E69; color:antiquewhite;"><tr>...</tr></thead><tbody>';
+							var html = '<thead style="background-color:#4caf50; color:green;"><tr>...</tr></thead><tbody>';
 							for (var i = 0, len = data.length; i < len; ++i) {
 
 
@@ -153,6 +155,32 @@
 				$('#CbEstado').val(1)
 			else
 				$('#CbEstado').val(0)
+		}
+
+		function gestionarPaciente(accion)
+		{
+			var obj = {
+				id: $('#TxtId').val(),
+				Nombre: $('#TxtNombre').val(),
+				cedula: $('#TxtCedula').val(),
+				telefono: $('#TxtTelefono').val(),
+				estado: $('#CbEstado').val(),
+				Accion: accion
+			}		
+			$.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GestionarPaciente", "Paciente")',
+				data: JSON.stringify(obj),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+				success: function (dataa) {
+					consultar();
+                                       
+                },
+                error: function (err) {                   
+                },
+
+                });
 		}
 	</script>
 

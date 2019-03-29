@@ -46,6 +46,23 @@ namespace DATA.Repository.Imp
 			return listTipos;
 
 		}
+		public List<Tipo> GetListaPaciente()
+		{
+			List<Tipo> listTipos = new List<Tipo>();
+			try
+			{
+				using (var dbContext = new ContextClinica())
+				{
+					listTipos = dbContext.Database.SqlQuery<Tipo>("USP_ListarPacientes").ToList();
+				}
+			}
+			catch (SqlException exc)
+			{
+				throw exc;
+			}
+			return listTipos;
+
+		}
 		public List<Paciente> GetPaciente()
 		{
 			List<Paciente> list = new List<Paciente>();
@@ -160,7 +177,7 @@ namespace DATA.Repository.Imp
 
 					object[] parameters = new object[] { @idCita };
 
-					resultado = dbContext.Database.SqlQuery<string>("dbo.USP_CrearCita @idCita", parameters).FirstOrDefault();
+					resultado = dbContext.Database.SqlQuery<string>("dbo.USP_CancelarCita @idCita", parameters).FirstOrDefault();
 				}
 			}
 			catch (Exception exc)

@@ -15,5 +15,6 @@ namespace DATA.Repository
 		void GestionarPaciente(Paciente pac);
 		string CrearCita(Cita cita);
 		string CancelarCita(int id);
+		List<Tipo> GetListaPaciente();
 	}
 }

@@ -78,3 +78,8 @@ C:\Users\Administrado\Desktop\clinica\Clinica\Vista\obj\Debug\Vista.csproj.CoreC
 C:\Users\Administrado\Desktop\clinica\Clinica\Vista\obj\Debug\Vista.csproj.CopyComplete
 C:\Users\Administrado\Desktop\clinica\Clinica\Vista\obj\Debug\Vista.dll
 C:\Users\Administrado\Desktop\clinica\Clinica\Vista\obj\Debug\Vista.pdb
+C:\Users\Administrado\Desktop\clinica\Clinica\Vista\bin\DATA.exe
+C:\Users\Administrado\Desktop\clinica\Clinica\Vista\bin\EntityFramework.dll
+C:\Users\Administrado\Desktop\clinica\Clinica\Vista\bin\DATA.pdb
+C:\Users\Administrado\Desktop\clinica\Clinica\Vista\bin\DATA.exe.config
+C:\Users\Administrado\Desktop\clinica\Clinica\Vista\bin\EntityFramework.xml
